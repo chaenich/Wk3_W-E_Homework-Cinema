@@ -73,8 +73,8 @@ class Film
       FROM films
       WHERE id = $1"
     values = [id]
-    film = SqlRunner.run(sql, values)
-    return film[0]['price'].to_i
+    film = SqlRunner.run(sql, values).first
+    return film['price'].to_i
   end
 
 end
