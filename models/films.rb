@@ -68,4 +68,13 @@ class Film
     SqlRunner.run(sql)
   end
 
+  def self.get_ticket_price(id)
+    sql = "SELECT price
+      FROM films
+      WHERE id = $1"
+    values = [id]
+    film = SqlRunner.run(sql, values)
+    return film[0]['price'].to_i
+  end
+
 end

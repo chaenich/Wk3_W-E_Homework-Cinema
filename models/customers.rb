@@ -51,6 +51,10 @@ class Customer
     return Film.map_all(films_data)
   end
 
+  def buy_ticket(film_id)
+    price = Film.get_ticket_price(film_id)
+    @funds -= price
+  end
 
   def self.all()
     sql = "SELECT * FROM customers"
@@ -62,7 +66,6 @@ class Customer
     customer = customer_data.map { |customer| Customer.new(customer) }
     return customer
   end
-
 
   def self.delete_all()
     sql = "DELETE FROM customers"
