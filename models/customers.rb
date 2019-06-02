@@ -43,6 +43,7 @@ class Customer
     SqlRunner.run(sql, values)
   end
 
+  # To be changed - films are correct but include screening time
   def films()
     sql = "SELECT films.* FROM films
       INNER JOIN
@@ -53,7 +54,7 @@ class Customer
     return Film.map_all(films_data)
   end
 
-  # Basic Extension
+  # To be changed - basic extensions
   def buy_ticket(film_id)
     film = Film.get_film_details(film_id)
     @funds -= film['price'].to_i
