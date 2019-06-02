@@ -51,6 +51,14 @@ class Film
     return Customer.map_all(customers_data)
   end
 
+  def screen_times()
+    sql = "SELECT *
+      FROM screenings
+      WHERE film_id = $1"
+    values = [@id]
+    screening_data = SqlRunner.run(sql, values)
+    return Screening.map_all(screening_data)
+  end
 
   def self.all()
     sql = "SELECT * FROM films"
