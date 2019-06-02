@@ -53,6 +53,7 @@ class Customer
     return Film.map_all(films_data)
   end
 
+  # Basic Extension
   def buy_ticket(film_id)
     film = Film.get_film_details(film_id)
     @funds -= film['price'].to_i
@@ -62,6 +63,7 @@ class Customer
     new_ticket.save()
   end
 
+  # Basic Extension
   def ticket_count()
     # # count in database
     # sql = "SELECT count(*)
@@ -71,13 +73,16 @@ class Customer
     # tkt_cnt = SqlRunner.run(sql, values).first
     # return tkt_cnt['count'].to_i
 
-    # Count in Ruby
-    sql = "SELECT *
-      FROM tickets
-      WHERE customer_id = $1"
-    values = [@id]
-    tickets = SqlRunner.run(sql, values)
-    return tickets.count.to_i
+    # # Count in Ruby
+    # sql = "SELECT *
+    #   FROM tickets
+    #   WHERE customer_id = $1"
+    # values = [@id]
+    # tickets = SqlRunner.run(sql, values)
+    # return tickets.count.to_i
+
+    # Better method?
+    return films().count
   end
 
   def self.all()

@@ -68,14 +68,24 @@ class Film
     SqlRunner.run(sql)
   end
 
-  def self.get_film_details(id)
+  # Basic Extension
+  def self.get_film_details(film_id)
     sql = "SELECT *
       FROM films
       WHERE id = $1"
-    values = [id]
+    values = [film_id]
     film = SqlRunner.run(sql, values).first
     return film
+  end
 
+  # Basic Extension
+  def self.customer_count(film_id)
+    sql = "SELECT count(*)
+      FROM tickets
+      WHERE film_id =$1"
+    values = [film_id]
+    cust_count = SqlRunner.run(sql, values).first
+    return cust_count['count'].to_i
   end
 
 end
