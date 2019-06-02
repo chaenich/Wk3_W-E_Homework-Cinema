@@ -1,4 +1,6 @@
 require_relative('../db/sql_runner')
+require_relative('tickets')
+
 require('pry')
 
 class Customer
@@ -52,8 +54,12 @@ class Customer
   end
 
   def buy_ticket(film_id)
-    price = Film.get_ticket_price(film_id)
-    @funds -= price
+    film = Film.get_film_details(film_id)
+    @funds -= film['price'].to_i
+    update()
+    new_ticket = Ticket.new( {
+      'customer_id' => @id, 'film_id' => film['id'] } )
+    new_ticket.save()
   end
 
   def self.all()
