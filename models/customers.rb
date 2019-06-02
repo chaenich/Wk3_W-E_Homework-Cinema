@@ -62,6 +62,24 @@ class Customer
     new_ticket.save()
   end
 
+  def ticket_count()
+    # # count in database
+    # sql = "SELECT count(*)
+    #   FROM tickets
+    #   WHERE customer_id = $1"
+    # values = [@id]
+    # tkt_cnt = SqlRunner.run(sql, values).first
+    # return tkt_cnt['count'].to_i
+
+    # Count in Ruby
+    sql = "SELECT *
+      FROM tickets
+      WHERE customer_id = $1"
+    values = [@id]
+    tickets = SqlRunner.run(sql, values)
+    return tickets.count.to_i
+  end
+
   def self.all()
     sql = "SELECT * FROM customers"
     customers = SqlRunner.run(sql)
