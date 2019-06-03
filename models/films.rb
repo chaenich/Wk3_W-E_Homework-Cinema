@@ -112,7 +112,12 @@ class Film
         most_popular_screening = screening['screening_id']
       end
     }
-    p most_popular_screening
+    sql = "SELECT *
+      FROM screenings
+      WHERE id = $1"
+    values = [most_popular_screening]
+    screening = SqlRunner.run(sql, values).first
+    return screening['show_time']
   end
 
 end
