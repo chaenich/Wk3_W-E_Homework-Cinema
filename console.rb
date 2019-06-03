@@ -118,7 +118,7 @@ ticket7 = Ticket.new( {
 ticket7.save()
 
 ticket8 = Ticket.new( {
-  'customer_id' => customer2.id, 'film_id' => film2.id, 'screening_id' => screening3.id
+  'customer_id' => customer2.id, 'film_id' => film2.id, 'screening_id' => screening4.id
 })
 ticket8.save()
 

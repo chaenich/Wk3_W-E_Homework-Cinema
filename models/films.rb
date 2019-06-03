@@ -96,4 +96,23 @@ class Film
     return cust_count['count'].to_i
   end
 
+  def self.most_popular_time(film_id)
+    sql = "SELECT screening_id, count(*) as count
+      FROM tickets
+      WHERE film_id = $1
+      group by screening_id;"
+    values =[film_id]
+    screenings_data = SqlRunner.run(sql, values)
+
+    most_popular_screening = ""
+    screening_count = 0
+    screenings = screenings_data.map { |screening|
+      if screening['count'].to_i > screening_count
+        screening_count = screening['count'].to_i
+        most_popular_screening = screening['screening_id']
+      end
+    }
+    p most_popular_screening
+  end
+
 end
